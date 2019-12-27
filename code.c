@@ -1,20 +1,23 @@
-#include <stdio.h> 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
 
 int main()
 {
-	int t,second,minute,hour,day,month,year,week;
+	int time0,second,minute,hour,day,month,year,week;
 	int md[12]={31,28,31,30,31,30,31,31,30,31,30,31};
 	char *wd[7]={"Thursday","Friday","Saturday","Sunday","Monday","Tuesday","Wednsday"};
 	
-	while(1==1)
+	while(1)
 	{
-		t=time(0);
+		time0=time(0);
 		
 		//除法计算时间 
-		second=t%60;
-		minute=t/60%60;
-		hour=(t/3600+8)%24;
-		day=t/86400;
+		second=time0%60;
+		minute=time0/60%60;
+		hour=(time0/3600+8)%24;
+		day=time0/86400;
 		
 		//除法计算星期,1970年1月1日是周四	
 		week=day%7;
@@ -40,9 +43,9 @@ int main()
 				day-=md[month-1];
 			month++;
 		}
-		//输出，变量day表示“从1970年1月1日【过了】day天“，因此++day 
+		//输出，变量day表示“从1970年1月1日【过了】day天“，因此day+1 
 		system("cls");
-		printf("%.4d/%.2d/%.2d %.2d:%.2d:%.2d Today is %s.",year,month,++day,hour,minute,second,wd[week]);
-		while(time(0)-t<1);
+		printf("%.4d/%.2d/%.2d %.2d:%.2d:%.2d Today is %s.",year,month,day+1,hour,minute,second,wd[week]);
+		while(time(0)-time0<1);
 	}
 }
